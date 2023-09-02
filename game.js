@@ -28,9 +28,6 @@ function sellKaffe() {
         // Update the displays
         updateMoneyDisplay();
         updateCaffeDisplay();
-        // Reset the timer
-        timer = 5;
-        updateTimerDisplay();
     }
 }
 
@@ -45,9 +42,6 @@ document.getElementById("spendButton").addEventListener("click", function() {
         // Update the displays
         updateMoneyDisplay();
         updateCaffeDisplay();
-        // Reset the timer
-        timer = 5;
-        updateTimerDisplay();
     } else {
         alert("Not enough money!");
     }
@@ -64,5 +58,7 @@ setInterval(function() {
     updateTimerDisplay();
     if (timer <= 0) {
         sellKaffe();
+        timer = 5; // Reset the timer after selling a kaffe
+        updateTimerDisplay();
     }
 }, 1000);
