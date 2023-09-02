@@ -1,7 +1,10 @@
-// Initialize the money and caffe variables
+// Initialize the money, caffe, and timer variables
 var money = 100;
 var caffe = 0;
 var timer = 5;
+
+// Get the Kaffe price element
+var kaffePriceInput = document.getElementById("kaffePrice");
 
 // Function to update the money display
 function updateMoneyDisplay() {
@@ -20,11 +23,12 @@ function updateTimerDisplay() {
 
 // Function to sell a kaffe and get money
 function sellKaffe() {
+    var kaffePrice = parseInt(kaffePriceInput.value, 10);
     if (caffe >= 1) {
         // Subtract 1 from caffe
         caffe -= 1;
-        // Add 15 to money
-        money += 15;
+        // Add the user-defined Kaffe price to money
+        money += kaffePrice;
         // Update the displays
         updateMoneyDisplay();
         updateCaffeDisplay();
@@ -45,6 +49,12 @@ document.getElementById("spendButton").addEventListener("click", function() {
     } else {
         alert("Not enough money!");
     }
+});
+
+// Event listener for the Kaffe price input
+kaffePriceInput.addEventListener("input", function() {
+    // Update the displayed Kaffe price
+    document.getElementById("kaffePriceDisplay").textContent = kaffePriceInput.value;
 });
 
 // Initial displays
