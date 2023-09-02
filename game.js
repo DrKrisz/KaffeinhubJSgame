@@ -3,8 +3,9 @@ var money = 100;
 var caffe = 0;
 var timer = 5;
 
-// Get the Kaffe price element
+// Get the Kaffe price element and its display element
 var kaffePriceInput = document.getElementById("kaffePrice");
+var kaffePriceDisplay = document.getElementById("kaffePriceDisplay");
 
 // Function to update the money display
 function updateMoneyDisplay() {
@@ -53,8 +54,9 @@ document.getElementById("spendButton").addEventListener("click", function() {
 
 // Event listener for the Kaffe price input
 kaffePriceInput.addEventListener("input", function() {
-    // Update the displayed Kaffe price
-    document.getElementById("kaffePriceDisplay").textContent = kaffePriceInput.value;
+    // Update the displayed Kaffe price and its current value
+    var price = kaffePriceInput.value;
+    kaffePriceDisplay.textContent = price;
 });
 
 // Initial displays
