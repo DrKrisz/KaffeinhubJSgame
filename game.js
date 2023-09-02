@@ -1,7 +1,8 @@
-// Initialize the money, caffe, and timer variables
+// Initialize the money, caffe, timer, and kaffePrice variables
 var money = 100;
 var caffe = 0;
-var timer = getRandomTimer(5, 60); // Initial random timer (5 to 60 seconds)
+var timer = getRandomTimer(5, 15); // Initial random timer (5 to 15 seconds)
+var kaffePrice = 15; // Default Kaffe price
 
 // Get the Kaffe price element and its display element
 var kaffePriceInput = document.getElementById("kaffePrice");
@@ -24,19 +25,26 @@ function updateTimerDisplay() {
 
 // Function to sell a kaffe and get money
 function sellKaffe() {
-    var kaffePrice = parseInt(kaffePriceInput.value, 10);
     if (caffe >= 1) {
         // Subtract 1 from caffe
         caffe -= 1;
-        // Add the user-defined Kaffe price to money
+        // Add the stored Kaffe price to money
         money += kaffePrice;
         // Update the displays
         updateMoneyDisplay();
         updateCaffeDisplay();
-        // Recalculate the timer based on the Kaffe price and the given range
-        timer = getRandomTimer(5, 60);
+        // Recalculate the timer based on the stored Kaffe price and the given range
+        timer = getRandomTimer(5, 15);
         updateTimerDisplay();
     }
+}
+
+// Function to enable the Kaffe price input and reset the timer
+function enableKaffeInput() {
+    kaffePriceInput.disabled = false;
+    // Reset the timer to 5 seconds
+    timer = 5;
+    updateTimerDisplay();
 }
 
 // Event listener for the button click
@@ -57,9 +65,13 @@ document.getElementById("spendButton").addEventListener("click", function() {
 
 // Event listener for the Kaffe price input
 kaffePriceInput.addEventListener("input", function() {
+    // Disable the Kaffe price input temporarily
+    kaffePriceInput.disabled = true;
     // Update the displayed Kaffe price and its current value
-    var price = kaffePriceInput.value;
-    kaffePriceDisplay.textContent = price;
+    kaffePrice = parseInt(kaffePriceInput.value, 10);
+    kaffePriceDisplay.textContent = kaffePrice;
+    // Call enableKaffeInput after a 5-second delay to re-enable the input
+    setTimeout(enableKaffeInput, 5000);
 });
 
 // Initial displays
